@@ -1,0 +1,52 @@
+<button class="btn btn-primary" (click)="addNew($event)">Add New Task</button>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="">#</th>
+    <th scope="col">Name</th>
+    <th scope="col">Description</th>
+    <th scope="col">Due Date</th>
+    <th scope="col">Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let task of tasks; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+   <td>
+     <label>
+       <input type="text" [value]="task.name">
+     </label>
+    </td>
+    <td>
+      <input type="text" [value]="task.description">
+    </td>
+    <td>
+      <form class="dropdown">
+      <div class="col-12">
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd"
+                 name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+          <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+        </div>
+      </div>
+    </form>
+    </td>
+    <td>
+      <div ngbDropdown container="body">
+        <select type="button" class="btn btn-outline-primary btn-sm" (change)="onSelected(task.status)">
+          <option default>Not Started</option>
+          <option>In Progress</option>
+          <option>In Review</option>
+          <option>Completed</option>
+          <option>Cancelled</option>
+        </select>
+      </div>
+    </td>
+    <td><button class="btn btn-info" (click)="updateTask(i)">Update Task</button></td>
+    <td><button class="btn btn-outline-danger" (click)="deleteTask(i)">Delete Task</button></td>
+  </tr>
+  </tbody>
+</table>
+<button class="btn btn-primary" (click)=viewAll()>View All Tasks</button>
+<button class="btn btn-primary btn-danger" (click)="deleteAll()">Delete All Tasks</button>
