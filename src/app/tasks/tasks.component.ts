@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
-
-export interface Task {
-  name: string;
-  description: string;
-  dueDate: string;
-  status: Status;
-}
+import {Task} from "../model/Task";
 
 export enum Status {
   'Not_Started' = "Not Started",
