@@ -68,7 +68,8 @@
               "browserTarget": "list:build:production"
             },
             "development": {
-              "browserTarget": "list:build:development"
+              "browserTarget": "list:build:development",
+              "proxyConfig": "dev-proxy.config.json"
             }
           },
           "defaultConfiguration": "development"

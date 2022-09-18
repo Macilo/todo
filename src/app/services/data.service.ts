@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {Item} from "../model/Task";
 
 @Injectable({
   providedIn: 'root'
@@ -9,25 +10,25 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  taskUrl = `/api/task`
+  itemUrl = 'http://localhost:8080/task';
 
-  findTaskById(id:number):Observable<Task> {
-    return this.http.get<Task>(`${this.taskUrl}/${id}`);
+  findItemById(id:number):Observable<Item> {
+    return this.http.get<Item>(`${this.itemUrl}/${id}`);
   }
 
-  findAllTasks():Observable<Task[]>{
-      return this.http.get<Task[]>(`${this.taskUrl}`);
+  findAllItems():Observable<Item[]>{
+      return this.http.get<Item[]>(`${this.itemUrl}`);
   }
 
-  addTask(task: Task): Observable<any>{
-    return this.http.post<Task>(this.taskUrl, task);
+  addItem(item: Item): Observable<any>{
+    return this.http.post<Item>(this.itemUrl, item);
   }
 
-  updateTaskById(task: Task, id: number): Observable<any>{
-    return this.http.put<Task>(`${this.taskUrl}/${id}`,task);
+  updateItemById(item: Item, id: number): Observable<any>{
+    return this.http.put<Item>(`${this.itemUrl}/${id}`,item);
   }
 
-  deleteTaskById(id: number): Observable<any>{
-    return this.http.delete(`${this.taskUrl}/${id}`)
+  deleteItemById(id: number): Observable<any>{
+    return this.http.delete(`${this.itemUrl}/${id}`)
   }
 }
