@@ -9,6 +9,8 @@ import { ListComponent } from './list/list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import {faPencil, faTrash} from "@fortawesome/free-solid-svg-icons";
 
 @NgModule({
   declarations: [
@@ -23,9 +25,14 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(library: FaIconLibrary){
+  library.addIcons(faTrash, faPencil);
+  }
+}

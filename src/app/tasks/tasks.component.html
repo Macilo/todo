@@ -1,243 +1,33 @@
-<!--<button class="btn btn-primary" (click)="addNew($event)">Add New Task</button>-->
+<form [formGroup]="todoForm" (submit)="onSubmit()">
 
-<!--<table class="table table-striped">-->
-<!--  <thead>-->
-<!--  <tr>-->
-<!--    <th scope="">#</th>-->
-<!--    <th scope="col">Name</th>-->
-<!--    <th scope="col">Description</th>-->
-<!--    <th scope="col">Due Date</th>-->
-<!--    <th scope="col">Status</th>-->
-<!--  </tr>-->
-<!--  </thead>-->
-<!--  <tbody>-->
-<!--  <tr *ngFor="let task of tasks; index as i">-->
-<!--    <th scope="row">{{ i + 1 }}</th>-->
-<!--   <td>-->
-<!--     <label>-->
-<!--       <input type="text" [value]="task.name">-->
-<!--     </label>-->
-<!--    </td>-->
-<!--    <td>-->
-<!--      <input type="text" [value]="task.description">-->
-<!--    </td>-->
-<!--    <td>-->
-<!--      <form class="dropdown">-->
-<!--      <div class="col-12">-->
-<!--        <div class="input-group">-->
-<!--          <input class="form-control" placeholder="yyyy-mm-dd"-->
-<!--                 name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">-->
-<!--          <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </form>-->
-<!--    </td>-->
-<!--&lt;!&ndash;    <td>&ndash;&gt;-->
-<!--&lt;!&ndash;      <div ngbDropdown container="body">&ndash;&gt;-->
-<!--&lt;!&ndash;        <select type="button" class="btn btn-outline-primary btn-sm" *ngFor="let stats of task.status" (change)="onSelected(task.status)">&ndash;&gt;-->
-<!--&lt;!&ndash;          <option default>Not Started</option>&ndash;&gt;-->
-<!--&lt;!&ndash;          <option>{{stats.description}}</option>&ndash;&gt;-->
-<!--&lt;!&ndash;&lt;!&ndash;          <option>In Review</option>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;&lt;!&ndash;          <option>Completed</option>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;&lt;!&ndash;          <option>Cancelled</option>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;        </select>&ndash;&gt;-->
-<!--&lt;!&ndash;      </div>&ndash;&gt;-->
-<!--&lt;!&ndash;    </td>&ndash;&gt;-->
-<!--&lt;!&ndash;    <td><button class="btn btn-info" (click)="updateTask($event, i)=(i)">Update Task</button></td>&ndash;&gt;-->
-<!--    <td><button class="btn btn-outline-danger" (click)="deleteTask(i)">Delete Task</button></td>-->
-<!--  </tr>-->
-<!--  </tbody>-->
-<!--</table>-->
-<!--<button class="btn btn-primary" (click)=viewAll()>View All Tasks</button>-->
-<!--<button class="btn btn-primary btn-danger" (click)="deleteAll()">Delete All Tasks</button>-->
-<!--<pre>{{tasks}}</pre>-->
-
-<!-- Font Awesome -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-  rel="stylesheet"
-/>
-<!-- Google Fonts -->
-<link
-  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-  rel="stylesheet"
-/>
-<!-- MDB -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css"
-  rel="stylesheet"
-/>
-
-<section class="vh-100">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col">
-        <div class="card" id="list1" style="border-radius: .75rem; background-color: #eff1f2;">
-          <div class="card-body py-4 px-4 px-md-5">
-
-            <div class="text-center pt-3 pb-2">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp"
-                   alt="Check" width="60">
-              <h2 class="my-4">Task List</h2>
-            </div>
-
-          <form [formGroup]="todoForm" (submit)="onSubmit()">
-            <div class="pb-2" >
-              <div class="card mask-custom">
-                <div class="card-body">
-                  <div class="d-flex flex-row align-items-center">
-                    <input type="text" class="form-control form-control-lg" formControlName="name"
-                           placeholder="name">
-                    <a href="#!" data-mdb-toggle="tooltip" title="Set due date"><i
-                      class="fas fa-calendar-alt fa-lg me-3"></i></a>
-
-                    <input type="text" class="form-control form-control-lg" formControlName="description"
-                           placeholder="description">
-                    <a href="#!" data-mdb-toggle="tooltip" title="Set due date"><i
-                      class="fas fa-calendar-alt fa-lg me-3"></i></a>
-
-                    <input type="text" class="form-control form-control-lg" formControlName="dueDate"
-                           placeholder="dueDate">
-                    <a href="#!" data-mdb-toggle="tooltip" title="Set due date"><i
-                      class="fas fa-calendar-alt fa-lg me-3"></i></a>
-
-                    <div>
-                      <button type="button" class="btn btn-primary" (click)="addNew($event)">Add</button>
-                    </div>
-                  </div>
-                </div>
-
-                <table class="table table-hover table-light border-info text-black mb-0">
-                  <thead>
-                  <tr>
-                    <th scope="col">Task Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Priority</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Actions</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr class="fw-normal" *ngFor="let task of tasks">
-                    <th>
-                      <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                           alt="avatar 1" style="width: 45px; height: auto;">
-                      <span formcontrolname="name" class="ms-2">{{task.name}}</span>
-                    </th>
-                    <td class="align-middle">
-                      <span formcontrolname="description">{{task.description}}</span>
-                    </td>
-                    <td class="align-middle">
-                      <h6 class="mb-0"><span class="badge bg-info"  formcontrolname="dueDate">{{task.dueDate}}</span></h6>
-                    </td>
-                    <td>
-
-                    </td>
-                    <td class="align-middle">
-                      <a href="#!" data-mdb-toggle="tooltip" title="Edit" (click)="updateTask(task, task.id)"><i
-                        class="fas  fa-pencil fa-lg text-success me-3"></i></a>
-                      <a href="#!" data-mdb-toggle="tooltip" title="Remove" (click)="deleteTask(task.id)"><i
-                        class="fas fa-trash-alt fa-lg text-danger"></i></a>
-                    </td>
-                  </tr>
-<!--                  <tr class="fw-normal">-->
-<!--                    <th>-->
-<!--                      <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp"-->
-<!--                           alt="avatar 1" style="width: 45px; height: auto;">-->
-<!--                      <span class="ms-2">Kate Moss</span>-->
-<!--                    </th>-->
-<!--                    <td class="align-middle">Make payment to Bluedart</td>-->
-<!--                    <td class="align-middle">-->
-<!--                      <h6 class="mb-0"><span class="badge bg-success">Low priority</span></h6>-->
-<!--                    </td>-->
-<!--                    <td class="align-middle">-->
-<!--                      <a href="#!" data-mdb-toggle="tooltip" title="Done"><i-->
-<!--                        class="fas fa-check fa-lg text-success me-3"></i></a>-->
-<!--                      <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i-->
-<!--                        class="fas fa-trash-alt fa-lg text-warning"></i></a>-->
-<!--                    </td>-->
-<!--                  </tr>-->
-<!--                  <tr class="fw-normal">-->
-<!--                    <th>-->
-<!--                      <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"-->
-<!--                           alt="avatar 1" style="width: 45px; height: auto;">-->
-<!--                      <span class="ms-2">Danny McChain</span>-->
-<!--                    </th>-->
-<!--                    <td class="align-middle">Office rent</td>-->
-<!--                    <td class="align-middle">-->
-<!--                      <h6 class="mb-0"><span class="badge bg-warning">Middle priority</span></h6>-->
-<!--                    </td>-->
-<!--                    <td class="align-middle">-->
-<!--                      <a href="#!" data-mdb-toggle="tooltip" title="Done"><i-->
-<!--                        class="fas fa-check fa-lg text-success me-3"></i></a>-->
-<!--                      <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i-->
-<!--                        class="fas fa-trash-alt fa-lg text-warning"></i></a>-->
-<!--                    </td>-->
-<!--                  </tr>-->
-<!--                  <tr class="fw-normal">-->
-<!--                    <th>-->
-<!--                      <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava5-bg.webp"-->
-<!--                           alt="avatar 1" style="width: 45px; height: auto;">-->
-<!--                      <span class="ms-2">Alexa Chung</span>-->
-<!--                    </th>-->
-<!--                    <td class="align-middle">Office grocery shopping</td>-->
-<!--                    <td class="align-middle">-->
-<!--                      <h6 class="mb-0"><span class="badge bg-danger">High priority</span></h6>-->
-<!--                    </td>-->
-<!--                    <td class="align-middle">-->
-<!--                      <a href="#!" data-mdb-toggle="tooltip" title="Done"><i-->
-<!--                        class="fas fa-check fa-lg text-success me-3"></i></a>-->
-<!--                      <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i-->
-<!--                        class="fas fa-trash-alt fa-lg text-warning"></i></a>-->
-<!--                    </td>-->
-<!--                  </tr>-->
-<!--                  <tr class="fw-normal">-->
-<!--                    <th class="border-0">-->
-<!--                      <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"-->
-<!--                           alt="avatar 1" style="width: 45px; height: auto;">-->
-<!--                      <span class="ms-2">Ben Smith</span>-->
-<!--                    </th>-->
-<!--                    <td class="border-0 align-middle">Ask for Lunch to Clients</td>-->
-<!--                    <td class="border-0 align-middle">-->
-<!--                      <h6 class="mb-0"><span class="badge bg-success">Low priority</span></h6>-->
-<!--                    </td>-->
-<!--                    <td class="border-0 align-middle">-->
-<!--                      <a href="#!" data-mdb-toggle="tooltip" title="Done"><i-->
-<!--                        class="fas fa-check fa-lg text-success me-3"></i></a>-->
-<!--                      <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i-->
-<!--                        class="fas fa-trash-alt fa-lg text-warning"></i></a>-->
-<!--                    </td>-->
-<!--                  </tr>-->
-                  </tbody>
-                </table>
-
-
-              </div>
-            </div>
-          </form>
-
-            <hr class="my-4">
-
-            <div class="d-flex justify-content-end align-items-center mb-4 pt-2 pb-3">
-              <p class="small mb-0 me-2 text-muted">Filter</p>
-              <select class="select">
-                <option value="1">All</option>
-                <option value="2">Completed</option>
-                <option value="3">Active</option>
-                <option value="4">Has due date</option>
-              </select>
-              <p class="small mb-0 ms-4 me-2 text-muted">Sort</p>
-              <select class="select">
-                <option value="1">Added date</option>
-                <option value="2">Due date</option>
-              </select>
-              <a href="#!" style="color: #23af89;" data-mdb-toggle="tooltip" title="Ascending"><i
-                class="fas fa-sort-amount-down-alt ms-2"></i></a>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  <table class="table table table-hover table-light border-info text-black">
+        <thead>
+          <tr>
+              <th scope="col">Task Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Due Date</th>
+              <th scope="col">Status</th>
+              <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+      <tr *ngFor="let task of tasks">
+      <td>
+        <ngb-highlight [result]="task.name"></ngb-highlight>
+      </td>
+      <td><ngb-highlight [result]="task.description"></ngb-highlight></td>
+      <td>{{task.dueDate}}</td>
+        <td>{{task.status}}</td>
+        <td class="align-middle">
+            <i class="fa-sharp fa-solid fa-pencil text-success" aria-hidden="true" placement="top" ngbTooltip="Edit" (click)="updateTask(task, task.id)">
+              <fa-icon icon="pencil"></fa-icon>
+            </i>
+          &nbsp;
+          <i class="fa-trash-o text-danger" placement="top" aria-hidden="true" ngbTooltip="Remove" (click)="deleteTask(task.id)">
+              <fa-icon icon="trash"></fa-icon>
+          </i>
+        </td>
+    </tr>
+    </tbody>
+  </table>
+</form>

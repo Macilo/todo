@@ -6,12 +6,6 @@ import {FormBuilder, Validators} from "@angular/forms";
 
 export interface Status {
   description?: string
-  // 'Not_Started' = "Not Started",
-  // 'In_Progress' = "In Progress",
-  // 'In_Review' = "In Review",
-  // 'Completed' = "Completed",
-  // 'Cancelled' = "Cancelled"
-
 }
 
 
